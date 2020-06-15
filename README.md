@@ -11,3 +11,6 @@ Este blog está sendo criado inspirado no curso Formação Node do <a href='http
 - npm install --save sequelize
 - npm install --save mariadb
 /* Para quem não conhece, mariadb é um fork do mysql */
+
+- npm install --save slugify
+/* Essa biblioteca transforme por exemplo, uma categoria de nome: Node js em node-js ou Sistemas de Informação em sistemas-de-informacao */
