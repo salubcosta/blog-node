@@ -1,0 +1,34 @@
+<%- include('../../partials/header.ejs')%>
+
+<div class="container">
+    <h2 class="float-left">Categories</h2>
+    <a class="btn btn-success float-right" href="/admin/categories/new">Add</a>    
+</div>    
+
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Slug</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% cat.forEach(item => { %>
+            <tr>
+                <td><%= item.id %></td>
+                <td><%= item.title %></td>
+                <td><%= item.slug %></td>
+                <td>
+                    <button class="btn btn-warning">Edit</button>
+                    <button class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('../../partials/footer.ejs')%>
