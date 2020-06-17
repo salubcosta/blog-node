@@ -51,7 +51,7 @@ router.post('/categories/delete', (req, res)=>{
         if(!isNaN(id)){
             Category.destroy({where: {id: id}})
             .then(()=>res.redirect('/admin/categories')) //Go categories index
-            .catch(err=>console.log(`Something wrong happened to save ${err}`));
+            .catch(err=>console.log(`Something wrong happened to delete. Error: ${err}`));
         } else {
             console.log('Id isNaN!');
             res.redirect('/admin/categories');
