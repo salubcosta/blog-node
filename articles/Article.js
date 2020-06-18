@@ -6,6 +6,10 @@ const Article = Conn.define('articles', {
     title: {
         type: Sequelize.STRING,
         allowNull: false
+    }, 
+    description: {
+        type: Sequelize.STRING,
+        allowNull: false
     }, slug: {
         type: Sequelize.STRING,
         allowNull: false
