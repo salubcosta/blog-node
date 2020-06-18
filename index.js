@@ -7,7 +7,7 @@ const articleController = require('./articles/ArticlesController');
 const Article = require('./articles/Article');
 const Category = require('./categories/Category');
 
-
+const moment = require('moment');
 
 const app = express();
 
@@ -26,7 +26,11 @@ app.use('/', categoriesController);
 app.use('/', articleController);
 
 app.get('/', (req, res)=>{
-    res.render('index');
+    Article.findAll({include: [{model: Category}]})
+    .then((articles)=>{
+        res.render('index', {articles: articles, moment: moment});
+    });
+    // res.send('teste');
 })
 
 app.listen(3000, ()=>{
