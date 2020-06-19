@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <a class="navbar-brand" href="/">
         The Blog
     </a>
@@ -11,15 +11,9 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Categories</a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/admin/categories">Categories</a>
-                    <a class="dropdown-item" href="/admin/categories/new">New Category</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Articles</a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/admin/articles">Articles</a>
-                    <a class="dropdown-item" href="/admin/articles/new">New Article</a>
+                    <% categories.forEach((item)=>{%>
+                        <a class="dropdown-item" href="/categories/<%=item.id%>"><%=item.title%></a>    
+                    <%})%>
                 </div>
             </li>
         </ul>
