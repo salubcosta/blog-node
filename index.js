@@ -26,9 +26,13 @@ app.use('/', categoriesController);
 app.use('/', articleController);
 
 app.get('/', (req, res)=>{
-    Article.findAll({include: [{model: Category}]})
-    .then((articles)=>{
-        res.render('index', {articles: articles, moment: moment});
+    Article.findAll({
+        include: [{model: Category}],
+        order: [['id', 'desc']]
+    }).then((articles)=>{
+        Category.findAll().then((categories)=>{
+            res.render('index', {articles: articles, moment: moment, categories: categories});
+        })
     });
     // res.send('teste');
 })
