@@ -20,10 +20,10 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-
 // Working with routes
 app.use('/', categoriesController);
 app.use('/', articleController);
+
 
 app.get('/', (req, res)=>{
     Article.findAll({
@@ -35,6 +35,23 @@ app.get('/', (req, res)=>{
         })
     });
     // res.send('teste');
+})
+
+app.get('/:slug', (req, res)=>{
+    const slug = req.params.slug;
+    Article.findOne({
+        where:{slug: slug},
+        include: [{model: Category}]
+    })
+    .then((article)=>{
+        if(article != undefined){
+            Category.findAll().then((categories)=>{
+                res.render('article', {article: article, moment: moment, categories: categories});
+            }).catch((err)=>console.log(`Problem with load categories. Error: ${err}`));
+        } else {
+            res.redirect('/');
+        }
+    })
 })
 
 app.listen(3000, ()=>{
