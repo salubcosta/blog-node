@@ -12,7 +12,7 @@
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Categories</a>
                 <div class="dropdown-menu">
                     <% categories.forEach((item)=>{%>
-                        <a class="dropdown-item" href="/categories/<%=item.id%>"><%=item.title%></a>    
+                        <a class="dropdown-item" href="/categories/<%=item.slug%>"><%=item.title%></a>    
                     <%})%>
                 </div>
             </li>
