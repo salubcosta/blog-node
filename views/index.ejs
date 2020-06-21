@@ -14,10 +14,10 @@
                 <div class="col mb-4">
                     <a href="/<%= article.slug%>"><h2><%= article.title %></h2></a>
                     <p class="text-muted"> <%= moment(article.updatedAt).locale('pt-br').format('dddd, D [de] MMMM [de] YYYY');%> - 
-                        <a class="text-success" href="/categories/<%= article.categoryId%>"><%= article.category.title%></a>
+                        <a class="text-success" href="/categories/<%= article.category.slug%>"><%= article.category.title%></a>
                     </p>
                     <p><%= article.description%></p>
-                    <a class="btn btn-outline-primary" href="#">Leia mais</a>
+                    <a class="btn btn-outline-primary" href="/<%= article.slug%>">Leia mais</a>
                     <hr>
                 </div>
             <% })%>
