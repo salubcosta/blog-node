@@ -23,7 +23,7 @@
                 <td><%= item.title %></td>
                 <td><%= item.slug %></td>
                 <td>
-                    <a class="btn btn-warning float-left mr-2" href="/admin/categories/edit/<%=item.id%>">Edit</a>
+                    <a class="btn btn-warning float-left" href="/admin/categories/edit/<%=item.id%>">Edit</a>
                     <form action="/categories/delete" method="POST" onsubmit="confirmDelete(event, this)" >
                         <input type="hidden" name="id" value="<%=item.id%>" id="<%= item.title %>">
                         <button class="btn btn-danger">Delete</button>
