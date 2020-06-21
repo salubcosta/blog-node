@@ -63,4 +63,56 @@ router.post('/article/delete', (req, res)=>{
     }
 });
 
+router.get('/admin/article/edit/:id', (req, res)=>{
+    const id = req.params.id;
+    if(!isNaN(id)){
+        Article.findByPk(id)
+        .then(article=>{
+            Category.findByPk(article.categoryId)
+            .then(category=>{
+                const categorySelected = {id: category.id, title: category.title}
+                Category.findAll().then(categories=>{
+                    const categoryfilter = categories.filter(item => item.id != categorySelected.id)
+                    res.render('admin/articles/edit', {article: article, categories: categoryfilter, categorySelected: categorySelected});
+                })
+            })
+        })
+        Category.findAll().then(category=>{
+            
+        })
+    }else{
+        res.redirect('/admin/articles');
+    }
+});
+
+router.post('/article/edit', (req, res)=>{
+    const id = req.body.id;
+    const title = req.body.title;
+    const description = req.body.description;
+    const body = String(req.body.body);
+    const categoryId = req.body.category;
+    
+    if(isNaN(categoryId) || isNaN(id)){
+        res.redirect('/admin/articles');
+        return;
+    }
+    if(String(title).length < 10 || String(description).length < 10){
+        res.redirect('/admin/articles');
+        return;
+    } 
+    if(body.length < 200){
+        res.redirect('/admin/articles');
+        return;
+    }
+
+    Article.update({
+        title: title,
+        description: description,
+        slug: Slugify(title),
+        body: body,
+        categoryId: categoryId
+    }, { where: {id: id}})
+    .then(()=>res.redirect('/admin/articles'))
+})
+
 module.exports = router;
