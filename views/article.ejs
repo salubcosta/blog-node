@@ -1,6 +1,6 @@
 <%- include('./partials/header.ejs')%>
 <%- include('./partials/navbar.ejs')%>
-<div class="container">
+<div class="container mt-5">
     <div class="row">
         <div class="col-lg-8 text-justify">
             <div class="card">
@@ -11,7 +11,7 @@
                     <p class="text-muted">
                         <%= moment(article.updatedAt).locale('pt-br').format('dddd, D [de] MMMM [de] YYYY');%>
                         - 
-                        <a href="/categories/<%=article.categoryId%>"><%= article.category.title%></a>
+                        <a href="/categories/<%=article.category.slug%>"><%= article.category.title%></a>
                     </p>
                     <hr>
                     <p>
