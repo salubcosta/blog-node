@@ -52,7 +52,48 @@ app.get('/:slug', (req, res)=>{
             res.redirect('/');
         }
     })
-})
+});
+
+app.get('/categories/:slug', (req, res)=>{
+    const slug = req.params.slug;
+    if(slug != undefined){
+        Category.findOne({
+            where: {slug: slug}
+        }).then((category)=>{
+            if(category != undefined){
+                Article.findAll({
+                    where: { categoryId: category.id},
+                    include: [{model: Category}],
+                    order: [['id', 'desc']]
+                }).then((articles)=>{
+                    Category.findAll().then((categories)=>{
+                        res.render('categories', {articles: articles, moment: moment, categories: categories}); 
+                    })
+                });
+            }else{
+                res.redirect('/');
+            }
+        })
+    } else {
+        res.redirect('/');
+    }
+    // if(slug != undefined){
+    //     Article.findAll({
+    //         include: [{model: Category}],
+    //         order: [['id', 'desc']],
+    //     }).then((articles)=>{
+    //         if(articles != undefined){
+    //             Category.findAll({where: {'slug': slug}}).then((categories)=>{
+    //                 res.render('categories', {articles: articles, moment: moment, categories: categories}); 
+    //             })
+    //         }else{
+    //             res.redirect('/');
+    //         }
+    //     })
+    // }else{
+    //     res.redirect('/');
+    // }
+});
 
 app.listen(3000, ()=>{
     console.log('Server running');
