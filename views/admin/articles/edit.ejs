@@ -1,0 +1,52 @@
+<%- include('../../partials/header.ejs')%>
+<%- include('../../partials/navbarAdmin.ejs')%>
+<div class="container">
+    <form method="POST" action="/article/edit">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="float-left">Articles <small>- Edit</small></h1>
+                <a href="/admin/articles" class="float-right btn btn-secondary">Goback</a>
+            </div>
+            <div class="card-body">
+                <input type="hidden" name="id" value="<%=article.id%>">
+                <div class="form-group">
+                    <label for="lbtitle">Title</label>
+                    <input type="text" id="lbtitle" name="title" value="<%= article.title%>" placeholder="Type your title" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="lbDescription">Description</label>
+                    <input type="text" id="lbDescription" name="description" value="<%= article.description %>" placeholder="Type a sample description" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Post body</label>
+                    <textarea id="article" name="body" placeholder="Type post body" class="form-control" rows="15" ><%= article.body%></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select name="category" class="form-control">
+                        <option value="<%= categorySelected.id %>" selected="true"><%= categorySelected.title %></option>
+                        <% categories.forEach((item)=>{ %>
+                            <option value="<%= item.id %>"><%= item.title %></option>
+                        <% }) %>
+                    </select>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-success">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<%- include('../../partials/footer.ejs')%>
+
+<script src="/js/tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector: '#article',
+        language: 'pt_BR',
+        plugins: [
+            'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
+        ]
+    })
+</script>
