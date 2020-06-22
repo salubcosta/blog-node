@@ -28,7 +28,8 @@ app.use('/', articleController);
 app.get('/', (req, res)=>{
     Article.findAll({
         include: [{model: Category}],
-        order: [['id', 'desc']]
+        order: [['id', 'desc']],
+        limit: 4
     }).then((articles)=>{
         Category.findAll().then((categories)=>{
             res.render('index', {articles: articles, moment: moment, categories: categories});
@@ -77,24 +78,40 @@ app.get('/categories/:slug', (req, res)=>{
     } else {
         res.redirect('/');
     }
-    // if(slug != undefined){
-    //     Article.findAll({
-    //         include: [{model: Category}],
-    //         order: [['id', 'desc']],
-    //     }).then((articles)=>{
-    //         if(articles != undefined){
-    //             Category.findAll({where: {'slug': slug}}).then((categories)=>{
-    //                 res.render('categories', {articles: articles, moment: moment, categories: categories}); 
-    //             })
-    //         }else{
-    //             res.redirect('/');
-    //         }
-    //     })
-    // }else{
-    //     res.redirect('/');
-    // }
 });
 
+app.get('/page/:num', (req, res)=>{
+    var page = req.params.num;
+    var offset = 0;
+    var limit = 4;
+
+    if(isNaN(page) || page == 1){
+        offset = 0
+    } else {
+        offset = (Number(page)-1)*limit;
+    }
+    
+    Article.findAndCountAll({
+        limit: limit,
+        offset: offset,
+        include: [{model: Category}]   
+    }).then(articles =>{
+        var next = false;
+        if(offset+limit >= articles.count){
+            next = false
+        } else {
+            next = true;
+        }
+        result = {
+            page: parseInt(page),
+            next: next,
+            articles: articles
+        }
+        Category.findAll().then((categories)=>{
+            res.render('page', {result: result, moment: moment, categories: categories});
+        })
+    })
+});
 app.listen(3000, ()=>{
     console.log('Server running');
 });
