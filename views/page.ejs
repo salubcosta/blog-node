@@ -1,0 +1,52 @@
+<%- include('./partials/header.ejs')%>
+<div class="jumbotron mb-0">
+    <div class="container text-center">
+        <h1>Salumao.com.br</h1>
+        <p>É isso aí, enfim saiu o blog</p>
+    </div>
+</div>
+<%- include('./partials/navbar.ejs')%>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <% result.articles.rows.forEach((article)=>{ %>
+                <div class="col mb-4">
+                    <a href="/<%= article.slug%>"><h2><%= article.title %></h2></a>
+                    <p class="text-muted"> <%= moment(article.updatedAt).locale('pt-br').format('dddd, D [de] MMMM [de] YYYY');%> - 
+                        <a class="text-success" href="/categories/<%= article.category.slug%>"><%= article.category.title%></a>
+                    </p>
+                    <p><%= article.description%></p>
+                    <a class="btn btn-outline-primary" href="/<%= article.slug%>">Leia mais</a>
+                    <hr>
+                </div>
+            <% })%>
+            <div class="col-md-12">
+                <% if(result.page > 2) {%>
+                    <a href="/page/<%= result.page-1%>" class="float-left btn btn-outline-success">
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i> 
+                        Anterior
+                    </a>
+                <% } else if(result.page==2){%>
+                    <a href="/>" class="float-left btn btn-outline-success">
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                        Anterior
+                    </a>
+                <%}%>
+                <% if(result.next) {%>
+                <a href="/page/<%= result.page+1%>" class="float-right btn btn-outline-success">
+                    Próximo 
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </a>
+                <% } %>
+            </div>
+        </div>
+        <!-- Inclusão da parte autor -->
+        <%- include('./partials/author.ejs')%>
+    </div>
+</div>
+
+<%- include('./partials/footer.ejs')%>
