@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const Connection = require('./database/database'); //Database connection
 const categoriesController = require('./categories/CategoriesController');
 const articleController = require('./articles/ArticlesController');
+const user = require('./user/UsersController');
 
 const Article = require('./articles/Article');
 const Category = require('./categories/Category');
@@ -23,7 +24,7 @@ app.use(bodyParser.json());
 // Working with routes
 app.use('/', categoriesController);
 app.use('/', articleController);
-
+app.use('/', user);
 
 app.get('/', (req, res)=>{
     Article.findAll({
