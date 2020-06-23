@@ -17,3 +17,6 @@ Este blog está sendo criado inspirado no curso Formação Node do <a href='http
 
 - npm install moment --save
 /* Biblioteca para trabalhar com datas */
+
+npm install --save bcryptjs
+/* Será utilizado para criar hash da senha*/
