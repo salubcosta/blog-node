@@ -20,3 +20,6 @@ Este blog está sendo criado inspirado no curso Formação Node do <a href='http
 
 npm install --save bcryptjs
 /* Será utilizado para criar hash da senha*/
+
+npm install express-session --save
+/* Trabalhar com sessões */
