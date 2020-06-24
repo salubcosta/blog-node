@@ -1,20 +1,20 @@
 const express = require('express');
 const slugify = require('slugify');
 const Category = require('./Category');
-
+const adminAuth = require('../middlewares/adminAuth');
 const router = express.Router();
 
-/** 
+/** adminAuth,
  * Route view {new} with form
  */
-router.get('/admin/categories/new', (req, res)=>{
+router.get('/admin/categories/new', adminAuth, (req, res)=>{
     res.render('admin/categories/new');
 });
 
 /**
  * Save data on database
  */
-router.post('/categories/save',(req, res)=>{
+router.post('/categories/save', adminAuth, (req, res)=>{
     const title = req.body.title;
 
     if(title != undefined){
@@ -35,7 +35,7 @@ router.post('/categories/save',(req, res)=>{
 /**
  * Load data from the database
  */
-router.get('/admin/categories', (req, res)=>{
+router.get('/admin/categories', adminAuth, (req, res)=>{
     Category.findAll({raw: true})
     .then((cat)=>{
         res.render('admin/categories/index', { cat: cat});
@@ -45,7 +45,7 @@ router.get('/admin/categories', (req, res)=>{
 /**
  * Delete data
  */
-router.post('/categories/delete', (req, res)=>{
+router.post('/categories/delete', adminAuth, (req, res)=>{
     const id = req.body.id;
     if(id != undefined){
         if(!isNaN(id)){
@@ -65,7 +65,7 @@ router.post('/categories/delete', (req, res)=>{
 /**
  * Load view {Edit}
  */
-router.get('/admin/categories/edit/:id', (req, res)=>{
+router.get('/admin/categories/edit/:id', adminAuth, (req, res)=>{
     const id = Number(req.params.id);
 
     if(isNaN(id)){
@@ -81,7 +81,7 @@ router.get('/admin/categories/edit/:id', (req, res)=>{
 /**
  * Update category
  */
-router.post('/categories/edit', (req, res)=>{
+router.post('/categories/edit', adminAuth, (req, res)=>{
     const id = req.body.id;
     const title = req.body.title;
 
