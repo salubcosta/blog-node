@@ -4,6 +4,7 @@ const Connection = require('./database/database'); //Database connection
 const categoriesController = require('./categories/CategoriesController');
 const articleController = require('./articles/ArticlesController');
 const user = require('./user/UsersController');
+const session = require('express-session');
 
 const Article = require('./articles/Article');
 const Category = require('./categories/Category');
@@ -12,6 +13,15 @@ const moment = require('moment');
 
 const app = express();
 
+/**
+ * 30 segundos em milisegundos é 30000
+ * 1 minuto seria o dobro disso 60000
+ * 1 hora seria 60minutos * 60000ms = 3600000
+ * */
+app.use(session({
+    secret: '!@#$%*()',
+    cookie: { maxAge: 3600000}
+}))
 // Authentication on dabatase
 Connection.authenticate().then(()=>console.log('Authenticated')).catch(err=>console.log(`Bad news. Error: ${err}`));
 
