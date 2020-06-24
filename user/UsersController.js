@@ -40,4 +40,37 @@ router.post('/user/save', (req, res)=>{
         }
     });
 });
+
+router.get('/admin/login', (req, res)=>{
+    res.render('admin/users/login');
+});
+
+router.post('/authenticate', (req, res)=>{
+    const email = req.body.email;
+    const password = req.body.password;
+
+    User.findOne({where: {email: email}}).then((user)=>{
+        if(user != undefined){
+            const isValid = bcryptjs.compareSync(password, user.password);
+            if(isValid){    
+                req.session.user = {
+                    id: user.id,
+                    name: user.name,
+                    email: user.email
+                }
+                res.redirect('/admin/articles');
+            } else {
+                res.redirect('/admin/login');
+            }
+        } else {
+            res.redirect('/admin/login');
+        }
+    })
+});
+
+router.get('/admin/logout', (req, res)=>{
+    req.session.user = undefined;
+    res.redirect('/');
+});
+
 module.exports = router;
