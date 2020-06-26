@@ -19,7 +19,7 @@ router.post('/user/save', adminAuth, (req, res)=>{
     const email = req.body.email;
     const password = req.body.password;
 
-    if(name == undefined || email == undefined || password == undefined){
+    if(name == undefined || email == undefined || password == undefined || password == ''){
         res.redirect('admin/users');
         return;
     }
@@ -72,6 +72,42 @@ router.post('/authenticate', (req, res)=>{
 router.get('/admin/logout', (req, res)=>{
     req.session.user = undefined;
     res.redirect('/');
+});
+
+router.get('/admin/user/edit/:id', (req, res)=>{
+    const id = req.params.id;
+    if(!isNaN(id)){
+        User.findByPk(id).then(user=>{
+            if(user != undefined){
+                res.render('admin/users/edit', {user: user});
+            } else {
+                res.redirect('/admin/users');
+            }
+        }).catch(err=>console.log(err));
+    } else {
+        res.redirect('/admin/users');
+    }
+});
+
+router.post('/user/edit', (req, res)=>{
+    const id = req.body.id;
+    const name = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
+    
+    if(name == undefined || email == undefined || password == undefined || password == ''){
+        res.redirect('admin/users');
+        return;
+    }
+
+    const salt = bcryptjs.genSaltSync(10);
+    const hash = bcryptjs.hashSync(password, salt);
+
+    User.update({
+        name: name,
+        email: email,
+        password: hash
+    }, {where: {id:id}}).then(()=>res.redirect('/admin/users')).catch((err)=>console.log(err));
 });
 
 module.exports = router;
