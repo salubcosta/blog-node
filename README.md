@@ -23,3 +23,16 @@ npm install --save bcryptjs
 
 npm install express-session --save
 /* Trabalhar com sessões */
+
+### Projeto concluído
+
+Por hora está pronto e já pode ser upado para servidor.
+
+#### Implementação futura:
+
+- Melhorar interface
+- Implementar pesquisa
+- Criar table no banco para autor e popular suas informações no banco
+- Implemntar cabeçalho dinâmico
+- Implementar comentários nos artigos
+- Implementar "tags" nos articles para trabalhar melhor SEO
