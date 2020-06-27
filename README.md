@@ -28,7 +28,7 @@ npm install express-session --save
 
 Por hora está pronto e já pode ser upado para servidor.
 
-#### Implementação futura:
+#### Implementacoes futuras:
 
 - Melhorar interface
 - Implementar pesquisa
@@ -36,3 +36,43 @@ Por hora está pronto e já pode ser upado para servidor.
 - Implemntar cabeçalho dinâmico
 - Implementar comentários nos artigos
 - Implementar "tags" nos articles para trabalhar melhor SEO
+
+#### Screenshots
+
+- Home
+<img src='https://raw.githubusercontent.com/salubcosta/blog-node/master/public/images/Screenshot_home.png' width='100%'>
+
+- Menu Categories
+<img src='https://raw.githubusercontent.com/salubcosta/blog-node/master/public/images/Screenshot_menu_categories.png' width='100%'>
+
+- Article
+<img src='https://raw.githubusercontent.com/salubcosta/blog-node/master/public/images/Screenshot_article.png' width='100%'>
+
+- Article by Categories
+<img src='https://raw.githubusercontent.com/salubcosta/blog-node/master/public/images/Screenshot_article_by_category.png' width='100%'>
+
+- Paginate
+<img src='https://raw.githubusercontent.com/salubcosta/blog-node/master/public/images/Screenshot_pagination.png' width='100%'>
+
+- Login
+<img src='https://raw.githubusercontent.com/salubcosta/blog-node/master/public/images/Screenshot_restricted_login.png' width='100%'>
+
+- User
+<img src='https://raw.githubusercontent.com/salubcosta/blog-node/master/public/images/Screenshot_restricted_user.png' width='100%'>
+
+- Article - new
+<img src='https://raw.githubusercontent.com/salubcosta/blog-node/master/public/images/Screenshot_restricted_articles.png' width='100%'>
+
+- Categories - new
+<img src='https://raw.githubusercontent.com/salubcosta/blog-node/master/public/images/Screenshot_restricted_categories.png' width='100%'>
+
+- All categories on restricted area
+<img src='https://raw.githubusercontent.com/salubcosta/blog-node/master/public/images/Screenshot_restricted_categories_all.png' width='100%'>
+
+<hr />
+Thank you for coming here,<br />
+You can know more about me at: <a href="https://www.linkedin.com/in/salumao/" target="_blank">LinkedIn</a>
+
+
+
+
